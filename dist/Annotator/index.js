@@ -2,7 +2,6 @@ import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useReducer, useEffect } from "react";
 import MainLayout from "../MainLayout";
-import SettingsProvider from "../SettingsProvider";
 import combineReducers from "./reducers/combine-reducers.js";
 import generalReducer from "./reducers/general-reducer.js";
 import imageReducer from "./reducers/image-reducer.js";
@@ -44,6 +43,7 @@ export var Annotator = function Annotator(_ref) {
       videoTime = _ref$videoTime === void 0 ? 0 : _ref$videoTime,
       videoName = _ref.videoName,
       onExit = _ref.onExit,
+      onBack = _ref.onBack,
       onNextImage = _ref.onNextImage,
       onPrevImage = _ref.onPrevImage,
       keypointDefinitions = _ref.keypointDefinitions,
@@ -109,6 +109,8 @@ export var Annotator = function Annotator(_ref) {
         return onNextImage(without(state, "history"));
       } else if (action.buttonName === "Prev" && onPrevImage) {
         return onPrevImage(without(state, "history"));
+      } else if (action.buttonName === "Back" && onBack) {
+        return onBack(without(state, "history"));
       }
     }
 
@@ -129,7 +131,7 @@ export var Annotator = function Annotator(_ref) {
     });
   }, [selectedImage, state.images]);
   if (!images && !videoSrc) return 'Missing required prop "images" or "videoSrc"';
-  return React.createElement(SettingsProvider, null, React.createElement(MainLayout, {
+  return React.createElement(MainLayout, {
     RegionEditLabel: RegionEditLabel,
     alwaysShowNextButton: Boolean(onNextImage),
     alwaysShowPrevButton: Boolean(onPrevImage),
@@ -140,6 +142,6 @@ export var Annotator = function Annotator(_ref) {
     hideHeaderText: hideHeaderText,
     hideNext: hideNext,
     hidePrev: hidePrev
-  }));
+  });
 };
 export default Annotator;

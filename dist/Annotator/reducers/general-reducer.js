@@ -942,11 +942,6 @@ export default (function (state, action) {
               return setIn(setNewImage(state.images[currentImageIndex + 1], currentImageIndex + 1), ["images", currentImageIndex + 1, "regions"], activeImage.regions);
             }
 
-          case "settings":
-            {
-              return setIn(state, ["settingsOpen"], !state.settingsOpen);
-            }
-
           case "help":
             {
               return state;

@@ -2,7 +2,6 @@ import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useRef, useEffect, useMemo, useState } from "react";
 import { styled } from "@material-ui/core/styles";
 import useEventCallback from "use-event-callback";
-import { useSettings } from "../SettingsProvider";
 var Video = styled("video")({
   zIndex: 0,
   position: "absolute"
@@ -36,7 +35,6 @@ export default (function (_ref) {
       videoPlaying = _ref.videoPlaying,
       onChangeVideoTime = _ref.onChangeVideoTime,
       onChangeVideoPlaying = _ref.onChangeVideoPlaying;
-  var settings = useSettings();
   var videoRef = useRef();
   var imageRef = useRef();
 
@@ -57,10 +55,6 @@ export default (function (_ref) {
       if (videoPlaying) {
         videoRef.current.play();
         renderLoopRunning = true;
-
-        if (settings.videoPlaybackSpeed) {
-          videoRef.current.playbackRate = parseFloat(settings.videoPlaybackSpeed);
-        }
       } else {
         videoRef.current.pause();
       }

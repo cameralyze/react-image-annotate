@@ -20,7 +20,6 @@ import RegionSelectAndTransformBoxes from "../RegionSelectAndTransformBoxes";
 import VideoOrImageCanvasBackground from "../VideoOrImageCanvasBackground";
 import useEventCallback from "use-event-callback";
 import RegionShapes from "../RegionShapes";
-import useWasdMode from "./use-wasd-mode";
 var useStyles = makeStyles(styles);
 
 var getDefaultMat = function getDefaultMat() {
@@ -68,7 +67,8 @@ export var ImageCanvas = function ImageCanvas(_ref2) {
       pointDistancePrecision = _ref2$pointDistancePr === void 0 ? 0 : _ref2$pointDistancePr,
       regionClsList = _ref2.regionClsList,
       regionTagList = _ref2.regionTagList,
-      showCrosshairs = _ref2.showCrosshairs,
+      _ref2$showCrosshairs = _ref2.showCrosshairs,
+      showCrosshairs = _ref2$showCrosshairs === void 0 ? true : _ref2$showCrosshairs,
       _ref2$showHighlightBo = _ref2.showHighlightBox,
       showHighlightBox = _ref2$showHighlightBo === void 0 ? true : _ref2$showHighlightBo,
       showPointDistances = _ref2.showPointDistances,
@@ -78,7 +78,7 @@ export var ImageCanvas = function ImageCanvas(_ref2) {
       _ref2$videoPlaying = _ref2.videoPlaying,
       videoPlaying = _ref2$videoPlaying === void 0 ? false : _ref2$videoPlaying,
       _ref2$showMask = _ref2.showMask,
-      showMask = _ref2$showMask === void 0 ? true : _ref2$showMask,
+      showMask = _ref2$showMask === void 0 ? false : _ref2$showMask,
       fullImageSegmentationMode = _ref2.fullImageSegmentationMode,
       autoSegmentationOptions = _ref2.autoSegmentationOptions,
       onImageOrVideoLoaded = _ref2.onImageOrVideoLoaded,
@@ -134,10 +134,6 @@ export var ImageCanvas = function ImageCanvas(_ref2) {
   var windowSize = useWindowSize();
   var getLatestMat = useEventCallback(function () {
     return mat;
-  });
-  useWasdMode({
-    getLatestMat: getLatestMat,
-    changeMat: changeMat
   });
 
   var _useMouse = useMouse({

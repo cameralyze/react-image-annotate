@@ -5,9 +5,7 @@ import { makeStyles, styled } from "@material-ui/core/styles";
 import ImageCanvas from "../ImageCanvas";
 import styles from "./styles";
 import useKey from "use-key-hook";
-import classnames from "classnames";
-import { useSettings } from "../SettingsProvider";
-import SettingsDialog from "../SettingsDialog"; // import Fullscreen from "../Fullscreen"
+import classnames from "classnames"; // import Fullscreen from "../Fullscreen"
 
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import getActiveImage from "../Annotator/reducers/get-active-image";
@@ -63,7 +61,6 @@ export var MainLayout = function MainLayout(_ref2) {
       _ref2$hidePrev = _ref2.hidePrev,
       hidePrev = _ref2$hidePrev === void 0 ? false : _ref2$hidePrev;
   var classes = useStyles();
-  var settings = useSettings();
   var fullScreenHandle = useFullScreenHandle();
   var memoizedActionFns = useRef({});
 
@@ -125,8 +122,7 @@ export var MainLayout = function MainLayout(_ref2) {
       e.target.focus();
     }
   }, []);
-  var canvas = React.createElement(ImageCanvas, Object.assign({}, settings, {
-    showCrosshairs: settings.showCrosshairs && !["select", "pan", "zoom"].includes(state.selectedTool),
+  var canvas = React.createElement(ImageCanvas, {
     key: state.selectedImage,
     showMask: state.showMask,
     fullImageSegmentationMode: state.fullImageSegmentationMode,
@@ -168,7 +164,7 @@ export var MainLayout = function MainLayout(_ref2) {
     onChangeVideoPlaying: action("CHANGE_VIDEO_PLAYING", "isPlaying"),
     onRegionClassAdded: onRegionClassAdded,
     allowComments: state.allowComments
-  }));
+  });
   var onClickIconSidebarItem = useEventCallback(function (item) {
     dispatch({
       type: "SELECT_TOOL",
@@ -218,7 +214,9 @@ export var MainLayout = function MainLayout(_ref2) {
     }) : activeImage ? React.createElement("div", {
       className: classes.headerTitle
     }, activeImage.name) : null].filter(Boolean),
-    headerItems: [!hidePrev && {
+    headerItems: [{
+      name: "Back"
+    }, !hidePrev && {
       name: "Prev"
     }, !hideNext && {
       name: "Next"
@@ -228,8 +226,6 @@ export var MainLayout = function MainLayout(_ref2) {
       name: "Pause"
     }, !nextImageHasRegions && activeImage.regions && {
       name: "Clone"
-    }, {
-      name: "Settings"
     }, state.fullScreen ? {
       name: "Window"
     } : {
@@ -321,14 +317,6 @@ export var MainLayout = function MainLayout(_ref2) {
       history: state.history,
       onRestoreHistory: action("RESTORE_HISTORY")
     })].filter(Boolean)
-  }, canvas), React.createElement(SettingsDialog, {
-    open: state.settingsOpen,
-    onClose: function onClose() {
-      return dispatch({
-        type: "HEADER_BUTTON_CLICKED",
-        buttonName: "Settings"
-      });
-    }
-  }))));
+  }, canvas))));
 };
 export default MainLayout;
