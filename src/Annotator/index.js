@@ -18,9 +18,9 @@ import imageReducer from "./reducers/image-reducer.js"
 import videoReducer from "./reducers/video-reducer.js"
 import historyHandler from "./reducers/history-handler.js"
 
-import useEventCallback from "use-event-callback"
-import makeImmutable, { without } from "seamless-immutable"
-import getFromLocalStorage from "../utils/get-from-local-storage"
+import useEventCallback from "use-event-callback";
+import makeImmutable, { without } from "seamless-immutable";
+import getFromLocalStorage from "../utils/get-from-local-storage";
 
 type Props = {
   taskDescription?: string,
