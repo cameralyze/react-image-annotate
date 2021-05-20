@@ -8,8 +8,6 @@ import styles from "./styles"
 import type { MainLayoutState, Action } from "./types"
 import useKey from "use-key-hook"
 import classnames from "classnames"
-import { useSettings } from "../SettingsProvider"
-import SettingsDialog from "../SettingsDialog"
 // import Fullscreen from "../Fullscreen"
 import { FullScreen, useFullScreenHandle } from "react-full-screen"
 import getActiveImage from "../Annotator/reducers/get-active-image"
@@ -72,7 +70,6 @@ export const MainLayout = ({
   hidePrev = false,
 }: Props) => {
   const classes = useStyles()
-  const settings = useSettings()
   const fullScreenHandle = useFullScreenHandle()
 
   const memoizedActionFns = useRef({})
@@ -121,11 +118,6 @@ export const MainLayout = ({
 
   const canvas = (
     <ImageCanvas
-      {...settings}
-      showCrosshairs={
-        settings.showCrosshairs &&
-        !["select", "pan", "zoom"].includes(state.selectedTool)
-      }
       key={state.selectedImage}
       showMask={state.showMask}
       fullImageSegmentationMode={state.fullImageSegmentationMode}
@@ -249,6 +241,7 @@ export const MainLayout = ({
               ) : null,
             ].filter(Boolean)}
             headerItems={[
+              { name: "Back" },
               !hidePrev && { name: "Prev" },
               !hideNext && { name: "Next" },
               state.annotationType !== "video"
@@ -257,7 +250,6 @@ export const MainLayout = ({
                 ? { name: "Play" }
                 : { name: "Pause" },
               !nextImageHasRegions && activeImage.regions && { name: "Clone" },
-              { name: "Settings" },
               state.fullScreen ? { name: "Window" } : { name: "Fullscreen" },
               { name: "Save" },
             ].filter(Boolean)}
@@ -384,15 +376,6 @@ export const MainLayout = ({
           >
             {canvas}
           </Workspace>
-          <SettingsDialog
-            open={state.settingsOpen}
-            onClose={() =>
-              dispatch({
-                type: "HEADER_BUTTON_CLICKED",
-                buttonName: "Settings",
-              })
-            }
-          />
         </HotkeyDiv>
       </FullScreen>
     </FullScreenContainer>

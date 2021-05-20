@@ -3,7 +3,6 @@
 import React, { useRef, useEffect, useMemo, useState } from "react"
 import { styled } from "@material-ui/core/styles"
 import useEventCallback from "use-event-callback"
-import { useSettings } from "../SettingsProvider"
 
 const Video = styled("video")({
   zIndex: 0,
@@ -41,7 +40,6 @@ export default ({
   onChangeVideoTime,
   onChangeVideoPlaying,
 }) => {
-  const settings = useSettings()
   const videoRef = useRef()
   const imageRef = useRef()
   const [error, setError] = useState()
@@ -58,11 +56,6 @@ export default ({
       if (videoPlaying) {
         videoRef.current.play()
         renderLoopRunning = true
-        if (settings.videoPlaybackSpeed) {
-          videoRef.current.playbackRate = parseFloat(
-            settings.videoPlaybackSpeed
-          )
-        }
       } else {
         videoRef.current.pause()
       }

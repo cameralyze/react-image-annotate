@@ -34,7 +34,6 @@ import RegionSelectAndTransformBoxes from "../RegionSelectAndTransformBoxes"
 import VideoOrImageCanvasBackground from "../VideoOrImageCanvasBackground"
 import useEventCallback from "use-event-callback"
 import RegionShapes from "../RegionShapes"
-import useWasdMode from "./use-wasd-mode"
 
 const useStyles = makeStyles(styles)
 
@@ -113,13 +112,13 @@ export const ImageCanvas = ({
   pointDistancePrecision = 0,
   regionClsList,
   regionTagList,
-  showCrosshairs,
+  showCrosshairs = true,
   showHighlightBox = true,
   showPointDistances,
   allowedArea,
   RegionEditLabel = null,
   videoPlaying = false,
-  showMask = true,
+  showMask = false,
   fullImageSegmentationMode,
   autoSegmentationOptions,
   onImageOrVideoLoaded,
@@ -154,7 +153,6 @@ export const ImageCanvas = ({
   const windowSize = useWindowSize()
 
   const getLatestMat = useEventCallback(() => mat)
-  useWasdMode({ getLatestMat, changeMat })
 
   const { mouseEvents, mousePosition } = useMouse({
     canvasEl,

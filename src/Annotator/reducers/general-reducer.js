@@ -830,9 +830,6 @@ export default (state: MainLayoutState, action: Action) => {
             activeImage.regions
           )
         }
-        case "settings": {
-          return setIn(state, ["settingsOpen"], !state.settingsOpen)
-        }
         case "help": {
           return state
         }

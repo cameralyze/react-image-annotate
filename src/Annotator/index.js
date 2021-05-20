@@ -11,7 +11,6 @@ import type {
   Action,
 } from "../MainLayout/types"
 import type { KeypointsDefinition } from "../ImageCanvas/region-tools"
-import SettingsProvider from "../SettingsProvider"
 
 import combineReducers from "./reducers/combine-reducers.js"
 import generalReducer from "./reducers/general-reducer.js"
@@ -83,6 +82,7 @@ export const Annotator = ({
   videoTime = 0,
   videoName,
   onExit,
+  onBack,
   onNextImage,
   onPrevImage,
   keypointDefinitions,
@@ -150,6 +150,8 @@ export const Annotator = ({
         return onNextImage(without(state, "history"))
       } else if (action.buttonName === "Prev" && onPrevImage) {
         return onPrevImage(without(state, "history"))
+      } else if (action.buttonName === "Back" && onBack) {
+        return onBack(without(state, "history"))
       }
     }
     dispatchToReducer(action)
@@ -175,20 +177,18 @@ export const Annotator = ({
     return 'Missing required prop "images" or "videoSrc"'
 
   return (
-    <SettingsProvider>
-      <MainLayout
-        RegionEditLabel={RegionEditLabel}
-        alwaysShowNextButton={Boolean(onNextImage)}
-        alwaysShowPrevButton={Boolean(onPrevImage)}
-        state={state}
-        dispatch={dispatch}
-        onRegionClassAdded={onRegionClassAdded}
-        hideHeader={hideHeader}
-        hideHeaderText={hideHeaderText}
-        hideNext={hideNext}
-        hidePrev={hidePrev}
-      />
-    </SettingsProvider>
+    <MainLayout
+      RegionEditLabel={RegionEditLabel}
+      alwaysShowNextButton={Boolean(onNextImage)}
+      alwaysShowPrevButton={Boolean(onPrevImage)}
+      state={state}
+      dispatch={dispatch}
+      onRegionClassAdded={onRegionClassAdded}
+      hideHeader={hideHeader}
+      hideHeaderText={hideHeaderText}
+      hideNext={hideNext}
+      hidePrev={hidePrev}
+    />
   )
 }
 

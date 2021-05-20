@@ -62,7 +62,6 @@ export type MainLayoutStateBase = {|
   annotationType: "video" | "image",
   mouseDownAt?: ?{ x: number, y: number },
   fullScreen?: boolean,
-  settingsOpen?: boolean,
   minRegionSize?: number,
   showTags: boolean,
   showMask: boolean,
