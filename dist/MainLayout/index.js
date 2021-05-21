@@ -224,8 +224,6 @@ export var MainLayout = function MainLayout(_ref2) {
       name: "Play"
     } : {
       name: "Pause"
-    }, !nextImageHasRegions && activeImage.regions && {
-      name: "Clone"
     }, state.fullScreen ? {
       name: "Window"
     } : {
