@@ -56,22 +56,6 @@ export const ClassSelectionMenu = ({
   regionClsList,
   onSelectCls,
 }) => {
-  useEffect(() => {
-    const keyMapping = {}
-    for (let i = 0; i < 9 && i < regionClsList.length; i++) {
-      keyMapping[i + 1] = () => onSelectCls(regionClsList[i])
-    }
-    const onKeyDown = (e) => {
-      if (keyMapping[e.key]) {
-        keyMapping[e.key]()
-        e.preventDefault()
-        e.stopPropagation()
-      }
-    }
-    window.addEventListener("keydown", onKeyDown)
-    return () => window.removeEventListener("keydown", onKeyDown)
-  }, [regionClsList, selectedCls])
-
   return (
     <SidebarBoxContainer
       title="Classifications"
@@ -89,9 +73,6 @@ export const ClassSelectionMenu = ({
             {capitalize(label)}
           </Label>
           <DashSep />
-          <Number className={classnames({ selected: label === selectedCls })}>
-            {index < 9 ? `Key [${index + 1}]` : ""}
-          </Number>
         </LabelContainer>
       ))}
       <Box pb={2} />

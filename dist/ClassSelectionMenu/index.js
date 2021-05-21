@@ -53,32 +53,6 @@ export var ClassSelectionMenu = function ClassSelectionMenu(_ref) {
   var selectedCls = _ref.selectedCls,
       regionClsList = _ref.regionClsList,
       onSelectCls = _ref.onSelectCls;
-  useEffect(function () {
-    var keyMapping = {};
-
-    var _loop = function _loop(i) {
-      keyMapping[i + 1] = function () {
-        return onSelectCls(regionClsList[i]);
-      };
-    };
-
-    for (var i = 0; i < 9 && i < regionClsList.length; i++) {
-      _loop(i);
-    }
-
-    var onKeyDown = function onKeyDown(e) {
-      if (keyMapping[e.key]) {
-        keyMapping[e.key]();
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    };
-
-    window.addEventListener("keydown", onKeyDown);
-    return function () {
-      return window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [regionClsList, selectedCls]);
   return React.createElement(SidebarBoxContainer, {
     title: "Classifications",
     subTitle: "",
@@ -104,11 +78,7 @@ export var ClassSelectionMenu = function ClassSelectionMenu(_ref) {
       className: classnames({
         selected: label === selectedCls
       })
-    }, capitalize(label)), React.createElement(DashSep, null), React.createElement(Number, {
-      className: classnames({
-        selected: label === selectedCls
-      })
-    }, index < 9 ? "Key [".concat(index + 1, "]") : ""));
+    }, capitalize(label)), React.createElement(DashSep, null));
   }), React.createElement(Box, {
     pb: 2
   }));
