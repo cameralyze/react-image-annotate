@@ -293,18 +293,21 @@ export var MainLayout = function MainLayout(_ref2) {
       imageTagList: state.imageTagList,
       onChangeImage: action("CHANGE_IMAGE", "delta"),
       expandedByDefault: true
-    }), // (state.images?.length || 0) > 1 && (
-    //   <ImageSelector
-    //     onSelect={action("SELECT_REGION", "region")}
-    //     images={state.images}
-    //   />
-    // ),
-    React.createElement(RegionSelector, {
-      regions: activeImage ? activeImage.regions : emptyArr,
-      onSelectRegion: action("SELECT_REGION", "region"),
-      onDeleteRegion: action("DELETE_REGION", "region"),
-      onChangeRegion: action("CHANGE_REGION", "region")
-    }), state.keyframes && React.createElement(KeyframesSelector, {
+    }),,
+    /* (state.images?.length || 0) > 1 && (
+      <ImageSelector
+        onSelect={action("SELECT_REGION", "region")}
+        images={state.images}
+      />
+    ), */
+
+    /* (<RegionSelector
+      regions={activeImage ? activeImage.regions : emptyArr}
+      onSelectRegion={action("SELECT_REGION", "region")}
+      onDeleteRegion={action("DELETE_REGION", "region")}
+      onChangeRegion={action("CHANGE_REGION", "region")}
+    />) */
+    state.keyframes && React.createElement(KeyframesSelector, {
       onChangeVideoTime: action("CHANGE_VIDEO_TIME", "newTime"),
       onDeleteKeyframe: action("DELETE_KEYFRAME", "time"),
       onChangeCurrentTime: action("CHANGE_VIDEO_TIME", "newTime"),

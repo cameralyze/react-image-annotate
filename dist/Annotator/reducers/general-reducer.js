@@ -935,13 +935,6 @@ export default (function (state, action) {
               return setNewImage(state.images[currentImageIndex + 1], currentImageIndex + 1);
             }
 
-          case "clone":
-            {
-              if (currentImageIndex === null) return state;
-              if (currentImageIndex === state.images.length - 1) return state;
-              return setIn(setNewImage(state.images[currentImageIndex + 1], currentImageIndex + 1), ["images", currentImageIndex + 1, "regions"], activeImage.regions);
-            }
-
           case "help":
             {
               return state;

@@ -345,18 +345,18 @@ export const MainLayout = ({
                   expandedByDefault
                 />
               ),
-              // (state.images?.length || 0) > 1 && (
-              //   <ImageSelector
-              //     onSelect={action("SELECT_REGION", "region")}
-              //     images={state.images}
-              //   />
-              // ),
-              <RegionSelector
+              /* (state.images?.length || 0) > 1 && (
+                <ImageSelector
+                  onSelect={action("SELECT_REGION", "region")}
+                  images={state.images}
+                />
+              ), */
+              /* (<RegionSelector
                 regions={activeImage ? activeImage.regions : emptyArr}
                 onSelectRegion={action("SELECT_REGION", "region")}
                 onDeleteRegion={action("DELETE_REGION", "region")}
                 onChangeRegion={action("CHANGE_REGION", "region")}
-              />,
+              />) */,
               state.keyframes && (
                 <KeyframesSelector
                   onChangeVideoTime={action("CHANGE_VIDEO_TIME", "newTime")}
